@@ -15,13 +15,14 @@
 
 \matrix [list=a, line width=.8pt] {
     \node [index=1]; &
-    \node [index=2]; &
+    \node [base element=z, index=2]; &
     \node [index=3]; &
-    \node [index=4]; &
-    \node [index=5]; \\
+    \node [raw element=$\ldots$]; &
+    \node [element=x]; &
+    \node [base element=y, index=6]; \\
 };
 
-\draw [<-] (a3.north) -- +(0, 1);
+\draw [<-] (z2.north) -- +(0, 1);
 
 \end{tikzpicture}
 

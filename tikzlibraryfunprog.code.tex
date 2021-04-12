@@ -19,11 +19,13 @@
     \pgfkeys{
       /tikz/.cd,
       list/.style={funprog, list=##1},
-      index/.style={funprog, \funprog@datastructure/index=##1}
+      base element/.store in=\funprog@baseelement,
+      raw element/.style={funprog, \funprog@datastructure/raw element=##1},
+      element/.style={funprog, \funprog@datastructure/element=##1},
+      index/.style={funprog, \funprog@datastructure/index=##1},
     }
   },
   /tikz/funprog/data structure/.store in=\funprog@datastructure,
-  /tikz/funprog/element/.store in=\funprog@element,
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -35,7 +37,7 @@
   list/.style={
     column sep=-\pgflinewidth,
     data structure=list,
-    element=#1,
+    base element=#1,
     inner sep=0pt,
     name=list #1,
     nodes={
@@ -48,10 +50,17 @@
     row sep=-\pgflinewidth,
   },
   list/.default=a,
+  list/element/.style={
+    name=#1,
+    node contents=$#1$,
+  },
+  list/raw element/.style={
+    node contents=#1,
+  },
   list/index/.style={
-    name=\funprog@element#1,
-    node contents=$\funprog@element_{#1}$,
-  }
+    name=\funprog@baseelement#1,
+    node contents=$\funprog@baseelement_{#1}$,
+  },
 }
 
 \makeatother
