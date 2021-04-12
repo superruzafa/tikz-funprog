@@ -1,0 +1,3 @@
+tests/*.aux
+tests/*.log
+tests/*.pdf

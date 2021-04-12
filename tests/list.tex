@@ -1,0 +1,28 @@
+\documentclass[12pt]{standalone}
+
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\input{../tikzlibraryfunprog.code.tex}
+
+\begin{document}
+
+\begin{tikzpicture}[
+    use funprog,
+    node distance=0pt,
+]
+
+\draw [help lines, step=1cm] (-3, -3) grid (3, 3);
+
+\matrix [list=a, line width=.8pt] {
+    \node [index=1]; &
+    \node [index=2]; &
+    \node [index=3]; &
+    \node [index=4]; &
+    \node [index=5]; \\
+};
+
+\draw [<-] (a3.north) -- +(0, 1);
+
+\end{tikzpicture}
+
+\end{document}

@@ -1,0 +1,57 @@
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Defining [funprog] family
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pgfkeys{
+  /tikz/.cd,
+  funprog/.is family,
+  funprog/.search also={/tikz},
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% [use funprog] 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pgfkeys{
+  /tikz/use funprog/.append code={
+    \pgfkeys{
+      /tikz/.cd,
+      list/.style={funprog, list=##1},
+      index/.style={funprog, \funprog@datastructure/index=##1}
+    }
+  },
+  /tikz/funprog/data structure/.store in=\funprog@datastructure,
+  /tikz/funprog/element/.store in=\funprog@element,
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% [list] 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pgfkeys{
+  /tikz/funprog/.cd,
+  list/.style={
+    column sep=-\pgflinewidth,
+    data structure=list,
+    element=#1,
+    inner sep=0pt,
+    name=list #1,
+    nodes={
+      draw,
+      inner sep=0pt,
+      minimum size=1cm,
+      outer sep=.5\pgflinewidth,
+    },
+    outer sep=-.5\pgflinewidth,
+    row sep=-\pgflinewidth,
+  },
+  list/.default=a,
+  list/index/.style={
+    name=\funprog@element#1,
+    node contents=$\funprog@element_{#1}$,
+  }
+}
+
+\makeatother
