@@ -14,12 +14,15 @@
 \draw [help lines, step=1cm] (-3, -3) grid (3, 3);
 
 \matrix [list=a, line width=.8pt] {
+    \node [elements before]; &
     \node [index=1]; &
     \node [base element=z, index=2]; &
     \node [index=3]; &
+    \node [elements between]; &
     \node [raw element=$\ldots$]; &
     \node [element=x]; &
-    \node [base element=y, index=6]; \\
+    \node [base element=y, index=6]; &
+    \node [elements after]; \\
 };
 
 \draw [<-] (z2.north) -- +(0, 1);

@@ -1,3 +1,5 @@
+\usetikzlibrary{calc}
+
 \makeatletter
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -23,6 +25,9 @@
       raw element/.style={funprog, \funprog@datastructure/raw element=##1},
       element/.style={funprog, \funprog@datastructure/element=##1},
       index/.style={funprog, \funprog@datastructure/index=##1},
+      elements before/.style={funprog, \funprog@datastructure/elements before=##1},
+      elements between/.style={funprog, \funprog@datastructure/elements between=##1},
+      elements after/.style={funprog, \funprog@datastructure/elements after=##1},
     }
   },
   /tikz/funprog/data structure/.store in=\funprog@datastructure,
@@ -61,6 +66,65 @@
     name=\funprog@baseelement#1,
     node contents=$\funprog@baseelement_{#1}$,
   },
+  list/elements before/.style={
+    append after command={
+      \pgfextra
+      \draw
+        (\tikzlastnode.north east) -- ++(-2.5mm, 0)
+        (\tikzlastnode.south east) -- ++(-2.5mm, 0)
+      ;
+      \draw [dashed]
+        (\tikzlastnode.north west) -- ($ (\tikzlastnode.north east) + (-2.5mm, 0) $)
+        (\tikzlastnode.south west) -- ($ (\tikzlastnode.south east) + (-2.5mm, 0) $)
+      ;
+      \endpgfextra
+    },
+    draw=none,
+    minimum width={#1 + 2.5mm},
+    node contents={},
+    outer sep=0pt,
+  },
+  list/elements before/.default=5mm,
+  list/elements between/.style={
+    append after command={
+      \pgfextra
+      \draw
+        (\tikzlastnode.north west) -- ++(2.5mm, 0)
+        (\tikzlastnode.north east) -- ++(-2.5mm, 0)
+        (\tikzlastnode.south west) -- ++(2.5mm, 0)
+        (\tikzlastnode.south east) -- ++(-2.5mm, 0)
+      ;
+      \draw [dashed]
+        ($ (\tikzlastnode.north west) + (2.5mm, 0) $) -- ($ (\tikzlastnode.north east) + (-2.5mm, 0) $)
+        ($ (\tikzlastnode.south west) + (2.5mm, 0) $) -- ($ (\tikzlastnode.south east) + (-2.5mm, 0) $)
+      ;
+      \endpgfextra
+    },
+    draw=none,
+    minimum width={2.5mm + #1 + 2.5mm},
+    node contents={},
+    outer sep=0pt,
+  },
+  list/elements between/.default=7.5mm,
+  list/elements after/.style={
+    append after command={
+      \pgfextra
+      \draw
+        (\tikzlastnode.north west) -- ++(2.5mm, 0)
+        (\tikzlastnode.south west) -- ++(2.5mm, 0)
+      ;
+      \draw [dashed]
+        ($ (\tikzlastnode.north west) + (2.5mm, 0) $) -- (\tikzlastnode.north east)
+        ($ (\tikzlastnode.south west) + (2.5mm, 0) $) -- (\tikzlastnode.south east)
+      ;
+      \endpgfextra
+    },
+    draw=none,
+    minimum width={2.5mm + #1 + 2.5mm},
+    node contents={},
+    outer sep=0pt,
+  },
+  list/elements after/.default=5mm,
 }
 
 \makeatother
