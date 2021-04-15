@@ -1,0 +1,29 @@
+\documentclass[12pt]{standalone}
+
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\input{../tikzlibraryfunprog.code.tex}
+
+\begin{document}
+
+\begin{tikzpicture}[
+    use funprog,
+    node distance=0pt,
+    every function/.style={
+        line width=.8pt,
+        node contents=\texttt{fun},
+    }
+]
+
+\draw [help lines, step=1cm] (-3, -3) grid (3, 3);
+
+\node (f) [function, arity=3, input=north, output=south];
+
+\node (g) [function, left=of f];
+
+\draw [<-] (f.north) -- +(0, 1);
+\draw [<-] (g.south) -- +(0, -1);
+
+\end{tikzpicture}
+
+\end{document}
