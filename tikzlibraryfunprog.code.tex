@@ -20,8 +20,7 @@
   /tikz/use funprog/.append code={
     \pgfkeys{
       /tikz/.cd,
-      %                         
-      list/.style={funprog, list=##1},
+      %
       %
       every function/.style={},
       function/.style={
@@ -35,6 +34,8 @@
       arity/.style={funprog, function/arity=##1},
       input/.style={funprog, function/input=##1},
       output/.style={funprog, function/output=##1},
+      every list/.style={},                         
+      list/.style={funprog, list=##1},
       %
       base element/.store in=\funprog@baseelement,
       raw element/.style={funprog, \funprog@datastructure/raw element=##1},
@@ -46,6 +47,7 @@
     }
   },
   /tikz/funprog/data structure/.store in=\funprog@datastructure,
+  /tikz/funprog/data structure name/.store in=\funprog@datastructurename,
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -55,12 +57,15 @@
 \pgfkeys{
   /tikz/funprog/.cd,
   list/.style={
+    every list,
     base element=#1,
     column sep=-\pgflinewidth,
     data structure=list,
+    data structure name=#1,
     inner sep=0pt,
     name=list #1,
     nodes={
+      anchor=base,
       draw,
       inner sep=0pt,
       minimum size=1cm,
@@ -68,8 +73,11 @@
     },
     outer sep=-.5\pgflinewidth,
     row sep=-\pgflinewidth,
+    text depth=.75ex,
+    text height=1.5ex,
   },
   list/.default=a,
+  list/.value required,
   list/element/.style={
     name=#1,
     node contents=$#1$,
@@ -78,7 +86,7 @@
     node contents=#1,
   },
   list/index/.style={
-    name=\funprog@baseelement#1,
+    name=\funprog@datastructurename#1,
     node contents=$\funprog@baseelement_{#1}$,
   },
   list/elements before/.style={

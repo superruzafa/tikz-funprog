@@ -9,14 +9,17 @@
 \begin{tikzpicture}[
     use funprog,
     node distance=0pt,
+    every list/.style={
+        line width=1.8pt,
+    }
 ]
 
 \draw [help lines, step=1cm] (-3, -3) grid (3, 3);
 
-\matrix [list=a, line width=.8pt] {
+\matrix [list=a, anchor=south] {
     \node [elements before]; &
     \node [index=1]; &
-    \node [base element=z, index=2]; &
+    \node [base element=z, index=4]; &
     \node [index=3]; &
     \node [elements between]; &
     \node [raw element=$\ldots$]; &
@@ -25,7 +28,16 @@
     \node [elements after]; \\
 };
 
-\draw [<-] (z2.north) -- +(0, 1);
+\matrix [list=b, base element=a, below=1cm of list a] {
+    \node [elements before]; &
+    \node [index=1]; &
+    \node [index=2]; &
+    \node [index=3]; &
+    \node [elements after]; \\
+};
+
+\draw [<-] (a4.north) -- +(0, 1);
+\draw [<-] (b2.south) -- +(0, -1);
 
 \end{tikzpicture}
 
