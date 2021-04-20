@@ -1,4 +1,5 @@
 \usetikzlibrary{calc}
+\usetikzlibrary{matrix}
 
 \makeatletter
 
@@ -21,7 +22,6 @@
     \pgfkeys{
       /tikz/.cd,
       %
-      %
       every function/.style={},
       function/.style={
         every function,
@@ -34,8 +34,13 @@
       arity/.style={funprog, function/arity=##1},
       input/.style={funprog, function/input=##1},
       output/.style={funprog, function/output=##1},
+      %
       every list/.style={},                         
       list/.style={funprog, list=##1},
+      %
+      every tuple/.style={},                         
+      tuple/.style={funprog, tuple=##1},
+      tuple delimiter/.style={funprog, tuple/delimiter=##1},
       %
       base element/.store in=\funprog@baseelement,
       raw element/.style={funprog, \funprog@datastructure/raw element=##1},
@@ -44,6 +49,7 @@
       elements before/.style={funprog, \funprog@datastructure/elements before=##1},
       elements between/.style={funprog, \funprog@datastructure/elements between=##1},
       elements after/.style={funprog, \funprog@datastructure/elements after=##1},
+      separator/.style={funprog, \funprog@datastructure/separator=##1},
     }
   },
   /tikz/funprog/data structure/.store in=\funprog@datastructure,
@@ -148,6 +154,67 @@
     outer sep=0pt,
   },
   list/elements after/.default=5mm,
+  list/separator/.style={},
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% [tuple] 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pgfkeys{
+  /tikz/funprog/.cd,
+  tuple/.style={
+    every tuple,
+    base element=#1,
+    data structure=tuple,
+    data structure name=#1,
+    inner sep=0pt,
+    name=tuple #1,
+    nodes={
+      anchor=base,
+    },
+    text depth=.75ex,
+    text height=1.5ex,
+  },
+  tuple/.default=a,
+  tuple/.value required,
+  tuple/delimiter/.is choice,
+  tuple/delimiter/braces/.style={
+    left delimiter=\{,
+    right delimiter=\},
+  },
+  tuple/delimiter/brackets/.style={
+    left delimiter=[,
+    right delimiter=],
+  },
+  tuple/delimiter/parenthesis/.style={
+    left delimiter=(,
+    right delimiter=),
+  },
+  tuple/element/.style={
+    name=#1,
+    node contents=$#1$,
+  },
+  tuple/raw element/.style={
+    node contents=#1,
+  },
+  tuple/index/.style={
+    name=\funprog@datastructurename#1,
+    node contents=$\funprog@baseelement_{#1}$,
+  },
+  tuple/elements before/.style={
+    node contents={...},
+  },
+  tuple/elements between/.style={
+    node contents={...},
+  },
+  tuple/elements after/.style={
+    node contents={...},
+  },
+  tuple/elements after/.default=5mm,
+  tuple/separator/.style={
+    node contents={,\,},
+  }
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

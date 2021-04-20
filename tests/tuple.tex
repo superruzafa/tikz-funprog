@@ -1,0 +1,49 @@
+\documentclass[12pt]{standalone}
+
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\input{../tikzlibraryfunprog.code.tex}
+
+\begin{document}
+
+\begin{tikzpicture}[
+    use funprog,
+    node distance=0pt,
+    every tuple/.style={
+        tuple delimiter=braces,
+    }
+]
+
+\draw [help lines, step=1cm] (-3, -3) grid (3, 3);
+
+\matrix [tuple=a] {
+    \node [elements before]; & \node [separator]; &
+    \node [index=1]; & \node [separator]; &
+    \node [elements between]; & \node [separator]; &
+    \node [index=2]; & \node [separator]; &
+    \node [elements after]; \\
+};
+
+\matrix [tuple=b, below=1 of tuple a] {
+    \node [index=1]; & \node [separator]; &
+    \node [index=2]; & \node [separator]; &
+    \node [elements between]; & \node [separator]; &
+    \node [index=i]; & \node [separator]; &
+    \node [elements after]; \\
+};
+
+\matrix [tuple=c, base element=x, right=1 of tuple a] {
+    \node [index=1]; & \node [separator]; &
+    \node [index=2]; & \node [separator]; &
+    \node [elements between]; & \node [separator]; &
+    \node [index=i]; & \node [separator]; &
+    \node [elements after]; \\
+};
+
+\draw [<-] (a1.north) -- +(0, 1);
+\draw [<-] (bi.south) -- +(1, -1);
+
+
+\end{tikzpicture}
+
+\end{document}
